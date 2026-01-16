@@ -19,7 +19,7 @@ function HeroSection() {
         </Heading>
         <p className={styles.heroTagline}>{siteConfig.tagline}</p>
         <p className={styles.heroDescription}>
-          Documentation for our gaming mods and plugins.
+          Documentation for our mods and plugins.
         </p>
       </div>
     </header>

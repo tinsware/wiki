@@ -95,6 +95,12 @@ h1, h2, h3, h4, h5, h6 {
   text-shadow: var(--tins-glow-green);
 }
 
+/* Navbar logo styling with white circular background */
+.navbar__brand img {
+  background-color: white;
+  border-radius: 50%;
+}
+
 /* Dropdown menu styling */
 .dropdown__menu {
   background: rgba(15, 15, 25, 0.98);
