@@ -19,10 +19,6 @@ Hytale is an upcoming sandbox game that combines block-based building with role-
 | [HyAnnouncer](/docs/hytale/mods/hyannouncer) | Announcement and broadcast system for servers | [CurseForge](https://www.curseforge.com/hytale/mods/hyannouncer) |
 
 :::note
-Hytale hasn't been released yet. Our mods are in development and will be available when the game launches.
+Hytale is in early access so our mods in it too.
 :::
 
-## Support
-
-- **GitHub:** [tins-dev](https://github.com/tins-dev)
-- **Discord:** [Join our server](https://discord.gg/tins)

@@ -65,6 +65,11 @@ const config: Config = {
           label: 'Minecraft',
         },
         {
+          href: 'https://discord.gg/TCJAwsdqum',
+          label: 'Discord',
+          position: 'right',
+        },
+        {
           href: 'https://github.com/tins-dev',
           label: 'GitHub',
           position: 'right',
@@ -73,6 +78,7 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
+      /* 
       links: [
         {
           title: 'Documentation',
@@ -101,6 +107,7 @@ const config: Config = {
           ],
         },
       ],
+      */
       copyright: `Copyright © ${new Date().getFullYear()} TINS - There Is No Spoon.`,
     },
     prism: {

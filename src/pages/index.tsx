@@ -88,17 +88,19 @@ function AboutSection() {
     <section className={styles.aboutSection}>
       <div className="container">
         <div className={styles.aboutContent}>
-          <Heading as="h2" className={styles.sectionTitle}>About TINS</Heading>
+          <Heading as="h2" className={styles.sectionTitle}>About</Heading>
           <p className={styles.aboutText}>
             <strong>TINS — There Is No Spoon.</strong> We develop mods and plugins 
             for various games. This wiki contains documentation, installation guides, 
             and configuration references for all our projects.
           </p>
+          {/* github link
           <div className={styles.aboutLinks}>
             <Link to="https://github.com/tins-dev" className={styles.aboutLink}>
               GitHub →
             </Link>
           </div>
+         */}
         </div>
       </div>
     </section>

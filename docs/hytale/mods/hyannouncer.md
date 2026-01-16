@@ -104,9 +104,3 @@ announcements:
     - "&eRemember to vote for our server!"
     - "&bNeed help? Ask a staff member!"
 ```
-
-## Support
-
-- **CurseForge:** [HyAnnouncer Page](https://www.curseforge.com/hytale/mods/hyannouncer)
-- **Discord:** [Join our server](https://discord.gg/tins)
-- **Issues:** Report bugs on our GitHub
