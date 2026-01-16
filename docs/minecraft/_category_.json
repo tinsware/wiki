@@ -1,0 +1,8 @@
+{
+  "label": "Minecraft",
+  "position": 2,
+  "link": {
+    "type": "doc",
+    "id": "minecraft/intro"
+  }
+}

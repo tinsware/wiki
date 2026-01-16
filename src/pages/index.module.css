@@ -1,23 +1,235 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+/* Hero Section */
+.hero {
   position: relative;
+  padding: 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a0a0f 0%, #0f1923 50%, #0a0a0f 100%);
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 
-.buttons {
+.heroContent {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 700px;
+}
+
+.heroTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3rem, 10vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #00ff88 0%, #00f0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroTagline {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00ff88;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.heroDescription {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+/* Wiki Section */
+.wikiSection {
+  padding: 4rem 0;
+  background: #0a0a0f;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sectionSubtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.wikiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.wikiCard {
   display: flex;
-  align-items: center;
+  background: rgba(15, 15, 25, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+.wikiCard:hover {
+  border-color: #00ff88;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.wikiCardEmoji {
+  font-size: 3rem;
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+}
+
+.wikiCardContent {
+  flex: 1;
+}
+
+.wikiCardTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.wikiCardDescription {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+.wikiCardItems {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.wikiCardItems li {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.25rem 0;
+}
+
+.wikiCardItems li::before {
+  content: '→ ';
+  color: #00ff88;
+}
+
+.wikiCardLink {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #00ff88;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wikiCard:hover .wikiCardLink {
+  text-decoration: underline;
+}
+
+/* About Section */
+.aboutSection {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, #0a0a0f 0%, #0f0f1a 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.aboutContent {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.aboutText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.aboutText strong {
+  color: #00ff88;
+}
+
+.aboutLinks {
+  display: flex;
+  gap: 2rem;
   justify-content: center;
+}
+
+.aboutLink {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.aboutLink:hover {
+  color: #00ff88;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 4rem 1.5rem;
+  }
+  
+  .wikiGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .wikiCard {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .wikiCardEmoji {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .aboutLinks {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

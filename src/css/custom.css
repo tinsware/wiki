@@ -1,30 +1,283 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * TINS - There Is No Spoon
+ * Custom theme with cyberpunk/matrix inspired aesthetics
  */
 
-/* You can override the default Infima variables here. */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Primary Colors - Neon Green Matrix Theme */
+  --ifm-color-primary: #00ff88;
+  --ifm-color-primary-dark: #00e67a;
+  --ifm-color-primary-darker: #00d973;
+  --ifm-color-primary-darkest: #00b35f;
+  --ifm-color-primary-light: #1aff96;
+  --ifm-color-primary-lighter: #26ff9d;
+  --ifm-color-primary-lightest: #4dffb3;
+  
+  /* Accent Colors */
+  --tins-accent-cyan: #00f0ff;
+  --tins-accent-purple: #bf00ff;
+  --tins-accent-orange: #ff6b00;
+  --tins-accent-red: #ff0055;
+  
+  /* Background gradients */
+  --tins-bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f23 100%);
+  --tins-card-bg: rgba(20, 20, 35, 0.8);
+  --tins-card-border: rgba(0, 255, 136, 0.2);
+  
+  /* Typography */
+  --ifm-font-family-base: 'Rajdhani', 'Segoe UI', system-ui, sans-serif;
+  --ifm-heading-font-family: 'Orbitron', 'Rajdhani', sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Sizing */
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 255, 136, 0.1);
+  
+  /* Shadows */
+  --tins-glow-green: 0 0 20px rgba(0, 255, 136, 0.3);
+  --tins-glow-cyan: 0 0 20px rgba(0, 240, 255, 0.3);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #00ff88;
+  --ifm-color-primary-dark: #00e67a;
+  --ifm-color-primary-darker: #00d973;
+  --ifm-color-primary-darkest: #00b35f;
+  --ifm-color-primary-light: #1aff96;
+  --ifm-color-primary-lighter: #26ff9d;
+  --ifm-color-primary-lightest: #4dffb3;
+  --ifm-background-color: #0a0a0f;
+  --ifm-background-surface-color: #12121a;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 255, 136, 0.15);
+}
+
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ifm-heading-font-family);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Navbar styling */
+.navbar {
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--tins-card-border);
+}
+
+.navbar__title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.navbar__link {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.navbar__link:hover {
+  color: var(--ifm-color-primary);
+  text-shadow: var(--tins-glow-green);
+}
+
+/* Dropdown menu styling */
+.dropdown__menu {
+  background: rgba(15, 15, 25, 0.98);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--tins-card-border);
+  border-radius: 8px;
+}
+
+.dropdown__link {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 500;
+}
+
+.dropdown__link:hover {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--ifm-color-primary);
+}
+
+/* Footer styling */
+.footer {
+  background: linear-gradient(180deg, #0a0a0f 0%, #050508 100%);
+  border-top: 1px solid var(--tins-card-border);
+}
+
+.footer__title {
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ifm-color-primary);
+}
+
+.footer__link-item {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 500;
+}
+
+/* Button styling */
+.button {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.button--primary {
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--tins-accent-cyan) 100%);
+  border: none;
+  color: #0a0a0f;
+}
+
+.button--primary:hover {
+  box-shadow: var(--tins-glow-green);
+  transform: translateY(-2px);
+}
+
+.button--secondary {
+  background: transparent;
+  border: 2px solid var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.button--secondary:hover {
+  background: rgba(0, 255, 136, 0.1);
+  box-shadow: var(--tins-glow-green);
+}
+
+/* Code blocks */
+pre {
+  border: 1px solid var(--tins-card-border);
+  border-radius: 8px;
+}
+
+code {
+  font-family: var(--ifm-font-family-monospace);
+  border-radius: 4px;
+}
+
+/* Cards and containers */
+.card {
+  background: var(--tins-card-bg);
+  border: 1px solid var(--tins-card-border);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--tins-glow-green);
+  transform: translateY(-4px);
+}
+
+/* Sidebar */
+.menu {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 500;
+}
+
+.menu__link--active {
+  color: var(--ifm-color-primary);
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+/* Table of contents */
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary);
+}
+
+/* Pagination */
+.pagination-nav__link {
+  border: 1px solid var(--tins-card-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--tins-glow-green);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-primary-darker);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-primary);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(0, 255, 136, 0.3);
+  color: #fff;
+}
+
+/* Animation keyframes */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--ifm-color-primary), 0 0 10px var(--ifm-color-primary);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--ifm-color-primary), 0 0 30px var(--ifm-color-primary);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Utility classes */
+.glow-text {
+  text-shadow: 0 0 10px var(--ifm-color-primary), 0 0 20px var(--ifm-color-primary);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--tins-accent-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
