@@ -17,6 +17,12 @@ Hytale is currently in early access, and this mod is also in early access. As th
 ## Features
 
 - **Scheduled Announcements**: Automatically send announcements at configurable intervals
+- **Cron-Based Scheduling**: Schedule announcements using cron expressions (e.g., `0 12 * * *` for daily at noon)
+- **Simple Mode Scheduling**: Use duration strings (e.g., `10s`, `5m`, `1h`, `2d`) for easy interval-based scheduling
+- **Sound System**: Play sounds with announcements (default sounds for title/notification, optional for chat)
+- **Advanced Lag Protection**: Smart gap protection prevents announcement bursts during server lag
+- **Announcement Modes**: 
+  - **ROTATION Mode** - One global interval, rotate through announcements one at a time (recommended)
 - **Multiple Display Types**: 
   - **Chat Announcements** - Messages in chat
   - **Title Announcements** - Center-screen titles (separate config)
@@ -31,7 +37,7 @@ Hytale is currently in early access, and this mod is also in early access. As th
 - **Color Codes**: Full Minecraft-style color code support (`&` and `§` symbols)
 - **Hex Colors**: Support for `&#RRGGBB` and `{#RRGGBB}` formats
 - **Multi-Color Messages**: Properly handles multiple colors in a single message
-- **Prefix Support**: Global prefix for all announcements, with per-announcement override
+- **Prefix Support**: Global prefix for all announcements
 - **Multi-Line Messages**: Each array element in `Lines` is a separate line
 - **Priority System**: Order announcements by priority when not using random order
 - **Require Players**: Option to only send announcements when players are online
@@ -50,7 +56,7 @@ Hytale is currently in early access, and this mod is also in early access. As th
 
 ## Quick Start
 
-The mod creates 6 configuration files:
+The mod creates 7 configuration files:
 
 - `config.json` - Debug settings
 - `chat-announcements.json` - Scheduled chat announcements
@@ -58,6 +64,7 @@ The mod creates 6 configuration files:
 - `notify-announcements.json` - Scheduled notification popup announcements
 - `welcome-message.json` - Welcome messages for joining players
 - `join-leave-announcements.json` - Join/leave broadcasts
+- `scheduled-actions.json` - Cron-based and duration-based scheduled actions
 
 ## GUI System
 
@@ -69,6 +76,7 @@ The GUI provides:
 - **Chat Announcements**: View, start/stop, and enable/disable individual announcements
 - **Title Announcements**: View, start/stop, and enable/disable individual announcements
 - **Notification Announcements**: View, start/stop, and enable/disable individual announcements
+- **Scheduled Actions**: Manage cron-based and duration-based scheduled actions
 - **Send Messages**: Manually send chat, title, or notification messages
 - **Wiki**: View commands and placeholders
 
@@ -81,6 +89,8 @@ The GUI provides:
 ![GUI - Announcement Details](hyannouncer_images/ha_gui3.png)
 
 ![GUI - Settings](hyannouncer_images/ha_gui4.png)
+
+![GUI - Scheduled Actions](hyannouncer_images/ha_gui5.png)
 
 ## Commands
 
@@ -160,15 +170,15 @@ Control announcement systems. When run without arguments, shows the status of al
 | Command | Description |
 |---------|-------------|
 | `/ha send chat <message>` | Send a chat message to all players |
-| `/ha send title <message>` | Send a title message to all players |
+| `/ha send title "title" "subtitle"` | Send a title message to all players (two quoted strings for title and subtitle) |
 | `/ha send notification <message>` | Send a notification to all players |
 | `/ha sendplayer chat <player> <message>` | Send a chat message to a specific player |
-| `/ha sendplayer title <player> <message>` | Send a title message to a specific player |
+| `/ha sendplayer title <player> "title" "subtitle"` | Send a title message to a specific player (two quoted strings) |
 | `/ha sendplayer notification <player> <message>` | Send a notification to a specific player |
 
 ## Configuration
 
-HyAnnouncer uses 6 separate JSON configuration files located in `HyAnnouncer_tins/` directory.
+HyAnnouncer uses 7 separate JSON configuration files located in `HyAnnouncer_tins/` directory.
 
 ### Main Config
 
@@ -188,26 +198,34 @@ HyAnnouncer uses 6 separate JSON configuration files located in `HyAnnouncer_tin
 
 Scheduled announcements sent automatically at intervals.
 
+#### ROTATION Mode
+
+HyAnnouncer uses ROTATION mode for all announcements:
+- **One global interval** - All announcements share the same timing
+- **One at a time** - Announcements rotate through the list sequentially or randomly
+- **Simple configuration** - Only one time entry needed at the top level
+- **No overlap** - Announcements never send at the same time
+- **Scheduled actions override** - Announcements in `scheduled-actions.json` are excluded from rotation
+
 ```json
 {
   "Enabled": true,
+  "Interval": 60,
   "RandomOrder": true,
   "Prefix": "&6&l[INFO]&r ",
   "RequirePlayers": false,
   "Announcements": [
     {
       "Id": "welcome",
-      "Interval": 120,
       "Priority": 0,
       "Enabled": true,
-      "Prefix": "",
-      "Type": "CHAT",
       "Worlds": [],
       "Permission": "",
       "Lines": [
         "&aThere are &e%total_players% &7players online."
       ],
-      "Link": ""
+      "Link": "",
+      "Sound": ""
     }
   ]
 }
@@ -215,21 +233,20 @@ Scheduled announcements sent automatically at intervals.
 
 **Settings:**
 - `Enabled` - Enable/disable all scheduled announcements
-- `RandomOrder` - `true` for random order, `false` for sequential
+- `Interval` - Global interval in seconds for all announcements (default: 60)
+- `RandomOrder` - `true` for random selection, `false` for sequential rotation
 - `Prefix` - Global prefix for all chat announcements (supports color codes, optional)
 - `RequirePlayers` - Only send announcements when at least 1 player is online (default: `false`)
 
 **Announcement Entry:**
 - `Id` - Unique identifier (required)
-- `Interval` - Seconds between announcements (default: 60)
 - `Enabled` - Enable/disable this specific announcement (default: `true`)
-- `Priority` - Priority/weight for ordering when `RandomOrder` is `false` (higher = first, default: 0)
-- `Prefix` - Optional per-announcement prefix override (empty = use global prefix)
-- `Type` - `CHAT` (required for chat announcements)
+- `Priority` - Affects rotation order when RandomOrder=false (higher = first, default: 0)
 - `Worlds` - Array of world names (empty = all worlds)
 - `Permission` - Permission node (empty = all players)
 - `Lines` - Array of message lines (each array element is a separate line)
 - `Link` - Optional clickable URL (e.g., Discord invite)
+- `Sound` - Optional sound to play with announcement (default: empty for chat)
 
 ### Title Announcements
 
@@ -237,16 +254,18 @@ Scheduled announcements sent automatically at intervals.
 
 Center-screen title announcements sent automatically at intervals.
 
+Uses **ROTATION** mode (same as Chat Announcements).
+
 ```json
 {
   "Enabled": true,
+  "Interval": 60,
   "RandomOrder": true,
   "RequirePlayers": false,
   "DefaultSubtitle": "&7Welcome to the server!",
   "Announcements": [
     {
       "Id": "event",
-      "Interval": 300,
       "Priority": 0,
       "Enabled": true,
       "Worlds": [],
@@ -256,7 +275,8 @@ Center-screen title announcements sent automatically at intervals.
       ],
       "Subtitle": "&eJoin us for special activities",
       "ShowSubtitle": true,
-      "Animate": false
+      "Animate": false,
+      "Sound": "SFX_Rope_Break"
     }
   ]
 }
@@ -264,21 +284,22 @@ Center-screen title announcements sent automatically at intervals.
 
 **Settings:**
 - `Enabled` - Enable/disable all scheduled title announcements
-- `RandomOrder` - `true` for random order, `false` for sequential
+- `Interval` - Global interval in seconds for all announcements (default: 60)
+- `RandomOrder` - `true` for random selection, `false` for sequential rotation
 - `RequirePlayers` - Only send announcements when at least 1 player is online (default: `false`)
 - `DefaultSubtitle` - Default subtitle for all title announcements (optional, supports color codes and placeholders)
 
 **Announcement Entry:**
 - `Id` - Unique identifier (required)
-- `Interval` - Seconds between announcements (default: 60)
 - `Enabled` - Enable/disable this specific announcement (default: `true`)
-- `Priority` - Priority/weight for ordering when `RandomOrder` is `false` (higher = first, default: 0)
+- `Priority` - Affects rotation order when RandomOrder=false (higher = first, default: 0)
 - `Worlds` - Array of world names (empty = all worlds)
 - `Permission` - Permission node (empty = all players)
 - `Lines` - Array of message lines (first line = primary title)
 - `Subtitle` - Optional per-announcement subtitle override (empty = use `DefaultSubtitle`, not set = use second line from `Lines` if available)
 - `ShowSubtitle` - Whether to show subtitle (default: `true`)
 - `Animate` - Whether to animate the title (controls major title effect, default: `false`)
+- `Sound` - Optional sound to play with announcement (default: `SFX_Rope_Break` for title)
 
 **Subtitle Priority:**
 1. If `ShowSubtitle` is `false`, no subtitle is shown
@@ -292,15 +313,17 @@ Center-screen title announcements sent automatically at intervals.
 
 Popup notification announcements sent automatically at intervals.
 
+Uses **ROTATION** mode (same as Chat Announcements).
+
 ```json
 {
   "Enabled": true,
+  "Interval": 60,
   "RandomOrder": true,
   "RequirePlayers": false,
   "Announcements": [
     {
       "Id": "reminder",
-      "Interval": 600,
       "Priority": 0,
       "Enabled": true,
       "Worlds": [],
@@ -310,7 +333,7 @@ Popup notification announcements sent automatically at intervals.
         "&7Don't forget to vote daily!"
       ],
       "Link": "https://example.com/vote",
-      "Priority": 0
+      "Sound": "SFX_Rope_Break"
     }
   ]
 }
@@ -318,19 +341,83 @@ Popup notification announcements sent automatically at intervals.
 
 **Settings:**
 - `Enabled` - Enable/disable all scheduled notification announcements
-- `RandomOrder` - `true` for random order, `false` for sequential
+- `Interval` - Global interval in seconds for all announcements (default: 60)
+- `RandomOrder` - `true` for random selection, `false` for sequential rotation
 - `RequirePlayers` - Only send announcements when at least 1 player is online (default: `false`)
 
 **Announcement Entry:**
 - `Id` - Unique identifier (required)
-- `Interval` - Seconds between announcements (default: 60)
 - `Enabled` - Enable/disable this specific announcement (default: `true`)
-- `Priority` - Priority/weight for ordering when `RandomOrder` is `false` (higher = first, default: 0)
+- `Priority` - Affects rotation order when RandomOrder=false (higher = first, default: 0)
 - `Worlds` - Array of world names (empty = all worlds)
 - `Permission` - Permission node (empty = all players)
 - `Lines` - Array of message lines (first line = header, second line = content)
 - `Link` - Optional clickable URL
-- `Priority` - Notification priority level (default: 0)
+- `Sound` - Optional sound to play with announcement (default: `SFX_Rope_Break` for notification)
+
+### Scheduled Actions
+
+**File:** `scheduled-actions.json`
+
+Cron-based and duration-based scheduled actions that trigger announcements at specific times. Announcements listed in scheduled-actions are automatically excluded from regular rotation.
+
+```json
+{
+  "Enabled": true,
+  "UseUtc": false,
+  "Actions": [
+    {
+      "Id": "scheduled_title1",
+      "Type": "title",
+      "Schedule": "5m",
+      "Enabled": true,
+      "Sound": "SFX_Rope_Break"
+    },
+    {
+      "Id": "scheduled_daily_title",
+      "Type": "title",
+      "Schedule": "0 12 * * *",
+      "Enabled": true,
+      "Sound": "SFX_Rope_Break"
+    }
+  ]
+}
+```
+
+**Settings:**
+- `Enabled` - Enable/disable all scheduled actions (default: `true`)
+- `UseUtc` - Use UTC time instead of server local time (default: `false`)
+
+**Action Entry:**
+- `Id` - Announcement ID from chat/title/notification configs (required)
+- `Type` - Announcement type: `"chat"`, `"title"`, or `"notification"` (required)
+- `Schedule` - Schedule expression:
+  - **Cron mode**: 5-field cron expression (e.g., `"0 12 * * *"` for daily at noon)
+  - **Simple mode**: Duration string (e.g., `"10s"`, `"5m"`, `"1h"`, `"2d"`)
+- `Enabled` - Enable/disable this specific action (default: `true`)
+- `Sound` - Optional sound to play (overrides announcement's sound if set)
+
+**Schedule Formats:**
+
+**Cron Expression** (5 fields: minute hour day month weekday):
+- `"0 12 * * *"` - Every day at 12:00 (noon)
+- `"*/30 * * * *"` - Every 30 minutes
+- `"0 0 * * 0"` - Every Sunday at midnight
+- `"0 9,17 * * *"` - Every day at 9:00 and 17:00
+
+**Simple Mode** (duration strings):
+- `"10s"` - Every 10 seconds
+- `"5m"` - Every 5 minutes
+- `"1h"` - Every hour
+- `"2d"` - Every 2 days
+
+:::tip
+When an announcement ID is listed in scheduled-actions and enabled, it will be excluded from regular rotation. The announcement will only trigger at its scheduled times. If the action is disabled in scheduled-actions, the announcement will return to regular rotation.
+:::
+
+:::warning
+If a scheduled action references an announcement ID that doesn't exist, it will be marked as invalid and won't run. Check the GUI or `/ha info` for warnings about invalid actions.
+:::
 
 ### Welcome Messages
 
@@ -520,37 +607,74 @@ Both formats are supported. The `{#RRGGBB}` format is compatible with EasyAnnoun
 
 ## Examples
 
+### Rotation Mode Example
+
+**Simple rotation mode configuration - one interval, announcements rotate one at a time:**
+
+```json
+{
+  "Enabled": true,
+  "Interval": 60,
+  "RandomOrder": true,
+  "Prefix": "&6&l[INFO]&r ",
+  "RequirePlayers": false,
+  "Announcements": [
+    {
+      "Id": "welcome",
+      "Priority": 0,
+      "Enabled": true,
+      "Lines": ["&aWelcome to the server!"],
+      "Sound": ""
+    },
+    {
+      "Id": "rules",
+      "Priority": 0,
+      "Enabled": true,
+      "Lines": ["&eRemember to follow server rules!"],
+      "Sound": ""
+    },
+    {
+      "Id": "tip",
+      "Priority": 0,
+      "Enabled": true,
+      "Lines": ["&bTip: Use &f/help &7to see commands!"],
+      "Sound": ""
+    }
+  ]
+}
+```
+
 ### World-Specific Announcement
 
 ```json
 {
   "Id": "spawn-rules",
-  "Interval": 600,
   "Priority": 0,
   "Enabled": true,
-  "Prefix": "",
-  "Type": "CHAT",
   "Worlds": ["spawn", "lobby"],
   "Permission": "",
   "Lines": ["&e&lSpawn Rules: &7No PvP allowed"],
-  "Link": ""
+  "Link": "",
+  "Sound": ""
 }
 ```
+
+:::note
+In ROTATION mode, all announcements use the global `Interval` from the top level. Individual announcements don't have their own intervals.
+:::
 
 ### Permission-Based Announcement
 
 ```json
 {
   "Id": "vip-benefits",
-  "Interval": 1800,
   "Priority": 0,
   "Enabled": true,
-  "Prefix": "",
-  "Type": "CHAT",
   "Worlds": [],
   "Permission": "hyannouncer.vip",
   "Lines": ["&6&lVIP: &eYou have access to special areas!"],
-  "Link": ""
+  "Link": "",
+  "Sound": ""
 }
 ```
 
@@ -559,15 +683,13 @@ Both formats are supported. The `{#RRGGBB}` format is compatible with EasyAnnoun
 ```json
 {
   "Id": "discord",
-  "Interval": 600,
   "Priority": 0,
   "Enabled": true,
-  "Prefix": "",
-  "Type": "CHAT",
   "Worlds": [],
   "Permission": "",
   "Lines": ["&9Join our Discord: &b&n[Click Here]"],
-  "Link": "https://discord.gg/your-invite"
+  "Link": "https://discord.gg/your-invite",
+  "Sound": ""
 }
 ```
 
@@ -576,11 +698,8 @@ Both formats are supported. The `{#RRGGBB}` format is compatible with EasyAnnoun
 ```json
 {
   "Id": "rules",
-  "Interval": 600,
   "Priority": 0,
   "Enabled": true,
-  "Prefix": "",
-  "Type": "CHAT",
   "Worlds": [],
   "Permission": "",
   "Lines": [
@@ -590,7 +709,8 @@ Both formats are supported. The `{#RRGGBB}` format is compatible with EasyAnnoun
     "&7No cheating",
     "----"
   ],
-  "Link": ""
+  "Link": "",
+  "Sound": ""
 }
 ```
 
@@ -601,27 +721,23 @@ When `RandomOrder` is `false`, announcements are sorted by priority (higher prio
 ```json
 {
   "Id": "important",
-  "Interval": 300,
   "Priority": 10,
   "Enabled": true,
-  "Prefix": "",
-  "Type": "CHAT",
   "Worlds": [],
   "Permission": "",
   "Lines": ["&c&lIMPORTANT: Server maintenance in 10 minutes!"],
-  "Link": ""
+  "Link": "",
+  "Sound": ""
 },
 {
   "Id": "regular",
-  "Interval": 300,
   "Priority": 0,
   "Enabled": true,
-  "Prefix": "",
-  "Type": "CHAT",
   "Worlds": [],
   "Permission": "",
   "Lines": ["Regular announcement"],
-  "Link": ""
+  "Link": "",
+  "Sound": ""
 }
 ```
 
@@ -630,7 +746,6 @@ When `RandomOrder` is `false`, announcements are sorted by priority (higher prio
 ```json
 {
   "Id": "event",
-  "Interval": 300,
   "Priority": 0,
   "Enabled": true,
   "Worlds": [],
@@ -641,7 +756,8 @@ When `RandomOrder` is `false`, announcements are sorted by priority (higher prio
   ],
   "Subtitle": "&eJoin us for special activities",
   "ShowSubtitle": true,
-  "Animate": false
+  "Animate": false,
+  "Sound": "SFX_Rope_Break"
 }
 ```
 
