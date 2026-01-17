@@ -11,10 +11,10 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://tins.dev',
+  url: 'https://tinsware.github.io',
   baseUrl: '/',
 
-  organizationName: 'tins-dev',
+  organizationName: 'tinsware',
   projectName: 'wiki',
 
   onBrokenLinks: 'throw',
@@ -70,7 +70,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://github.com/tins-dev',
+          href: 'https://github.com/tinsware',
           label: 'GitHub',
           position: 'right',
         },
@@ -98,7 +98,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/tins-dev',
+              href: 'https://github.com/tinsware',
             },
             {
               label: 'Discord',
