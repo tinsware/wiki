@@ -12,7 +12,7 @@ const config: Config = {
   },
 
   url: 'https://tinsware.github.io',
-  baseUrl: '/',
+  baseUrl: '/wiki',
 
   organizationName: 'tinsware',
   projectName: 'wiki',
