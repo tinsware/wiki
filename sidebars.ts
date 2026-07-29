@@ -27,7 +27,21 @@ const sidebars: SidebarsConfig = {
       label: 'Plugins',
       collapsible: true,
       collapsed: false,
-      items: ['games/minecraft/plugins/worldguard-extraflags-plus'],
+      items: [
+        {
+          type: 'category',
+          label: 'WorldGuard ExtraFlags Plus',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'games/minecraft/plugins/worldguard-extraflags-plus/index',
+            'games/minecraft/plugins/worldguard-extraflags-plus/flag-usage',
+            'games/minecraft/plugins/worldguard-extraflags-plus/flags-reference',
+            'games/minecraft/plugins/worldguard-extraflags-plus/configuration',
+            'games/minecraft/plugins/worldguard-extraflags-plus/disable-collision',
+          ],
+        },
+      ],
     },
   ],
 };

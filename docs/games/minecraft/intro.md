@@ -12,4 +12,4 @@ Documentation for tinsware plugins and server extensions for Minecraft.
 
 | Project | Description | Links |
 |---------|-------------|-------|
-| [WorldGuard ExtraFlags Plus](/docs/games/minecraft/plugins/worldguard-extraflags-plus) | 37+ extra flags for WorldGuard with Folia support | [GitHub](https://github.com/tins-dev/WorldGuardExtraFlagsPlus) |
+| [WorldGuard ExtraFlags Plus](/docs/games/minecraft/plugins/worldguard-extraflags-plus/) | 44+ WorldGuard region flags, Folia support, v4.4.2 | [GitHub](https://github.com/tins-dev/WorldGuardExtraFlagsPlus) |
