@@ -8,11 +8,11 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // SEO
-  description: 'tinsware wiki - all digital creations & entertainments documentation',
-  metadata: [
-    {name: 'keywords', content: 'tins, tinsware, there is no spoon, tinsmc, tinsworkshop, nospoonworkshop, wiki, documentation'},
-    {name: 'canonical', content: 'https://tinsware.github.io/wiki/'},
-  ],
+  customFields: {
+    description: 'tinsware wiki - all digital creations & entertainments documentation',
+    keywords: 'tins, tinsware, there is no spoon, tinsmc, tinsworkshop, nospoonworkshop, wiki, documentation',
+    canonical: 'https://tinsware.github.io/wiki/',
+  },
 
   future: {
     v4: true,
