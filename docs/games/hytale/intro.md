@@ -16,7 +16,7 @@ Hytale is a sandbox game with block-based building, role-playing mechanics, and 
 
 | Project | Description | Links |
 |---------|-------------|-------|
-| [HyAnnouncer](/docs/games/hytale/mods/hyannouncer) | Announcement and broadcast system for servers | [CurseForge](https://www.curseforge.com/hytale/mods/hyannouncer) |
+| [HyAnnouncer](/docs/games/hytale/mods/hyannouncer/) | Announcement and broadcast system for servers | [CurseForge](https://www.curseforge.com/hytale/mods/hyannouncer) |
 
 :::note
 Hytale is in early access, and tinsware projects in this category may change as the platform evolves.

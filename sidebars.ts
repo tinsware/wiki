@@ -12,7 +12,24 @@ const sidebars: SidebarsConfig = {
       label: 'Mods',
       collapsible: true,
       collapsed: false,
-      items: ['games/hytale/mods/hyannouncer'],
+      items: [
+        {
+          type: 'category',
+          label: 'HyAnnouncer',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'games/hytale/mods/hyannouncer/index',
+            'games/hytale/mods/hyannouncer/gui',
+            'games/hytale/mods/hyannouncer/sounds',
+            'games/hytale/mods/hyannouncer/commands',
+            'games/hytale/mods/hyannouncer/configuration',
+            'games/hytale/mods/hyannouncer/placeholders',
+            'games/hytale/mods/hyannouncer/color-codes',
+            'games/hytale/mods/hyannouncer/examples',
+          ],
+        },
+      ],
     },
   ],
 
