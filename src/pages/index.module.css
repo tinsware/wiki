@@ -126,37 +126,10 @@
 }
 
 .projectCardDescription {
-  margin: 0 0 0.75rem;
+  margin: 0;
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--ifm-font-color-secondary);
-}
-
-.projectCardItems {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 0.75rem;
-}
-
-.projectCardItems li {
-  font-size: 0.8rem;
-  color: var(--ifm-font-color-secondary);
-  padding: 0.15rem 0;
-}
-
-.projectCardItems li::before {
-  content: '· ';
-  color: var(--ifm-color-primary);
-}
-
-.projectCardLink {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--ifm-color-primary);
-}
-
-.projectCard:hover .projectCardLink {
-  text-decoration: underline;
 }
 
 @media screen and (max-width: 768px) {

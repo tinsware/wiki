@@ -2,7 +2,6 @@ export type WikiProject = {
   title: string;
   description: string;
   link: string;
-  items: string[];
 };
 
 export type WikiCategory = {
@@ -19,16 +18,14 @@ export const wikiCategories: WikiCategory[] = [
     description: 'Mods and plugins for game platforms',
     projects: [
       {
-        title: 'Hytale',
-        description: 'Server mods and tools for Hytale',
-        link: '/docs/games/hytale/intro',
-        items: ['HyAnnouncer'],
-      },
-      {
         title: 'Minecraft',
         description: 'Plugins and extensions for Minecraft servers',
         link: '/docs/games/minecraft/intro',
-        items: ['WorldGuard ExtraFlags Plus'],
+      },
+      {
+        title: 'Hytale',
+        description: 'Server mods and tools for Hytale',
+        link: '/docs/games/hytale/intro',
       },
     ],
   },

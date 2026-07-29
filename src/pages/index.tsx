@@ -7,23 +7,13 @@ import clsx from 'clsx';
 import {wikiCategories, type WikiProject} from '@site/src/data/wikiCategories';
 import styles from './index.module.css';
 
-function ProjectCard({title, description, link, items}: WikiProject) {
+function ProjectCard({title, description, link}: WikiProject) {
   return (
     <Link to={link} className={styles.projectCard}>
-      <div className={styles.projectCardContent}>
-        <Heading as="h3" className={styles.projectCardTitle}>
-          {title}
-        </Heading>
-        <p className={styles.projectCardDescription}>{description}</p>
-        {items.length > 0 && (
-          <ul className={styles.projectCardItems}>
-            {items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        )}
-        <span className={styles.projectCardLink}>View documentation</span>
-      </div>
+      <Heading as="h3" className={styles.projectCardTitle}>
+        {title}
+      </Heading>
+      <p className={styles.projectCardDescription}>{description}</p>
     </Link>
   );
 }
