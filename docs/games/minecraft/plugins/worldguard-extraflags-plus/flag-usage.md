@@ -85,7 +85,7 @@ Mitigates chambered ender pearl bypasses. Behavior may change in future releases
 /rg flag hub hide-players true
 ```
 
-See [disable-collision](./disable-collision) for collision troubleshooting and TAB integration.
+See [flags reference — disable-collision](./flags-reference#disable-collision) for team/TAB details and troubleshooting.
 
 ## Block control
 

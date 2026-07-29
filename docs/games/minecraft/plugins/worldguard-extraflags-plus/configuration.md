@@ -107,4 +107,3 @@ Automatically checks **Spigot**, **GitHub**, and **Modrinth** for new releases o
 
 - [Flag usage examples](./flag-usage)
 - [Flags reference](./flags-reference)
-- [disable-collision flag](./disable-collision)

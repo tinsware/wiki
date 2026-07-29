@@ -79,7 +79,6 @@ The JAR declares **`api-version: 1.21`** in `plugin.yml` for Paper 1.21.x and fo
 - [Flag usage examples](./flag-usage)
 - [Flags reference](./flags-reference)
 - [Configuration](./configuration)
-- [disable-collision flag](./disable-collision)
 
 ## Flag overview
 

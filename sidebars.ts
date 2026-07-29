@@ -38,7 +38,6 @@ const sidebars: SidebarsConfig = {
             'games/minecraft/plugins/worldguard-extraflags-plus/flag-usage',
             'games/minecraft/plugins/worldguard-extraflags-plus/flags-reference',
             'games/minecraft/plugins/worldguard-extraflags-plus/configuration',
-            'games/minecraft/plugins/worldguard-extraflags-plus/disable-collision',
           ],
         },
       ],
