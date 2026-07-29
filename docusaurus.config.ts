@@ -7,6 +7,13 @@ const config: Config = {
   tagline: 'There Is No Spoon',
   favicon: 'img/favicon.ico',
 
+  // SEO
+  description: 'tinsware wiki - all digital creations & entertainments documentation',
+  metadata: [
+    {name: 'keywords', content: 'tins, tinsware, there is no spoon, tinsmc, tinsworkshop, nospoonworkshop, wiki, documentation'},
+    {name: 'canonical', content: 'https://tinsware.github.io/wiki/'},
+  ],
+
   future: {
     v4: true,
   },
