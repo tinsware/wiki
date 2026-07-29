@@ -1,235 +1,175 @@
-/* Hero Section */
-.hero {
-  position: relative;
-  padding: 6rem 2rem;
+.wikiSection {
+  padding: 3rem 0 4rem;
+  min-height: calc(100vh - var(--ifm-navbar-height));
+}
+
+.pageHeader {
+  max-width: 42rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.pageEyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: var(--ifm-color-primary);
+}
+
+.pageTitle {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: var(--ifm-font-color-base);
+  text-transform: none;
+  letter-spacing: -0.02em;
+}
+
+.pageSubtitle {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ifm-font-color-secondary);
+}
+
+.categoryList {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: linear-gradient(135deg, #0a0a0f 0%, #0f1923 50%, #0a0a0f 100%);
-}
-
-.heroBackground {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.gridOverlay {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-.heroContent {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  max-width: 700px;
-}
-
-.heroTitle {
-  font-family: 'Orbitron', sans-serif;
-  font-size: clamp(3rem, 10vw, 5rem);
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #00ff88 0%, #00f0ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.heroTagline {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #00ff88;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin-bottom: 1rem;
-  opacity: 0.9;
-}
-
-.heroDescription {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0;
-}
-
-/* Wiki Section */
-.wikiSection {
-  padding: 4rem 0;
-  background: #0a0a0f;
-}
-
-.sectionHeader {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.sectionTitle {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.sectionSubtitle {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.wikiGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
-.wikiCard {
-  display: flex;
-  background: rgba(15, 15, 25, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.categoryBlock {
+  padding: 1.5rem;
+  border: 1px solid var(--tins-border);
   border-radius: 12px;
-  padding: 2rem;
+  background: var(--tins-surface);
+}
+
+.categoryBlockEmpty {
+  opacity: 0.72;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.categoryTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.categoryDescription {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ifm-font-color-secondary);
+}
+
+.categoryCount {
+  flex-shrink: 0;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  background: var(--tins-primary-soft);
+  white-space: nowrap;
+}
+
+.categoryEmptyState {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ifm-font-color-secondary);
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.projectCard {
+  display: block;
+  padding: 1.25rem;
+  border: 1px solid var(--tins-border);
+  border-radius: 10px;
+  background: var(--ifm-background-color);
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.wikiCard:hover {
-  border-color: #00ff88;
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 136, 0.1);
+.projectCard:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  color: inherit;
 }
 
-.wikiCardEmoji {
-  font-size: 3rem;
-  margin-right: 1.5rem;
-  flex-shrink: 0;
+.projectCardTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  text-transform: none;
+  letter-spacing: 0;
 }
 
-.wikiCardContent {
-  flex: 1;
+.projectCardDescription {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-secondary);
 }
 
-.wikiCardTitle {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.5rem;
-  color: #fff;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-}
-
-.wikiCardDescription {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 1rem;
-}
-
-.wikiCardItems {
+.projectCardItems {
   list-style: none;
   padding: 0;
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.75rem;
 }
 
-.wikiCardItems li {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
-  padding: 0.25rem 0;
+.projectCardItems li {
+  font-size: 0.8rem;
+  color: var(--ifm-font-color-secondary);
+  padding: 0.15rem 0;
 }
 
-.wikiCardItems li::before {
-  content: '→ ';
-  color: #00ff88;
+.projectCardItems li::before {
+  content: '· ';
+  color: var(--ifm-color-primary);
 }
 
-.wikiCardLink {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.9rem;
+.projectCardLink {
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #00ff88;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--ifm-color-primary);
 }
 
-.wikiCard:hover .wikiCardLink {
+.projectCard:hover .projectCardLink {
   text-decoration: underline;
 }
 
-/* About Section */
-.aboutSection {
-  padding: 4rem 0;
-  background: linear-gradient(180deg, #0a0a0f 0%, #0f0f1a 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.aboutContent {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.aboutText {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-}
-
-.aboutText strong {
-  color: #00ff88;
-}
-
-.aboutLinks {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-}
-
-.aboutLink {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.aboutLink:hover {
-  color: #00ff88;
-}
-
-/* Responsive */
 @media screen and (max-width: 768px) {
-  .hero {
-    padding: 4rem 1.5rem;
+  .wikiSection {
+    padding: 2rem 0 3rem;
   }
-  
-  .wikiGrid {
+
+  .categoryHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .projectGrid {
     grid-template-columns: 1fr;
-  }
-  
-  .wikiCard {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .wikiCardEmoji {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-  
-  .aboutLinks {
-    flex-direction: column;
-    gap: 1rem;
   }
 }

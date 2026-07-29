@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'TINS',
+  title: 'tinsware',
   tagline: 'There Is No Spoon',
   favicon: 'img/favicon.ico',
 
@@ -31,11 +31,25 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
         },
-        blog: false, // Blog disabled
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
+    ],
+  ],
+
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        language: ['en'],
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        indexBlog: false,
+        docsRouteBasePath: '/docs',
+      },
     ],
   ],
 
@@ -48,21 +62,18 @@ const config: Config = {
     navbar: {
       title: 'TINS',
       logo: {
-        alt: 'TINS Logo',
+        alt: 'tinsware logo',
         src: 'img/logo.svg',
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'hytaleSidebar',
+          type: 'custom-wikiHome',
           position: 'left',
-          label: 'Hytale',
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'minecraftSidebar',
+          type: 'search',
           position: 'left',
-          label: 'Minecraft',
+          className: 'navbar-search-center',
         },
         {
           href: 'https://discord.gg/TCJAwsdqum',
@@ -78,37 +89,7 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
-      /* 
-      links: [
-        {
-          title: 'Documentation',
-          items: [
-            {
-              label: 'Hytale',
-              to: '/docs/hytale/intro',
-            },
-            {
-              label: 'Minecraft',
-              to: '/docs/minecraft/intro',
-            },
-          ],
-        },
-        {
-          title: 'Links',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/tinsware',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discord.gg/tins',
-            },
-          ],
-        },
-      ],
-      */
-      copyright: `Copyright © ${new Date().getFullYear()} TINS - There Is No Spoon.`,
+      copyright: `© ${new Date().getFullYear()} tinsware · TINS`,
     },
     prism: {
       theme: prismThemes.github,
